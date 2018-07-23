@@ -2644,7 +2644,7 @@ configstore@^3.0.0:
 
 confusing-browser-globals@2.0.0-next.3e165448:
   version "2.0.0-next.3e165448"
-  resolved "http://r.npm.sankuai.com/confusing-browser-globals/download/confusing-browser-globals-2.0.0-next.3e165448.tgz#4291b5f964b58600b1e1fb940cc3072b91f3605a"
+  resolved "http://registry.npm.taobao.org/confusing-browser-globals/download/confusing-browser-globals-2.0.0-next.3e165448.tgz#4291b5f964b58600b1e1fb940cc3072b91f3605a"
 
 connect-history-api-fallback@^1.3.0:
   version "1.5.0"
@@ -3429,7 +3429,7 @@ eslint-config-airbnb@^16.0.0:
 
 eslint-config-react-app@3.0.0-next.3e165448:
   version "3.0.0-next.3e165448"
-  resolved "http://r.npm.sankuai.com/eslint-config-react-app/download/eslint-config-react-app-3.0.0-next.3e165448.tgz#7ccaaeef06c4a5b7eac8477587fd02a86e1729da"
+  resolved "http://registry.npm.taobao.org/eslint-config-react-app/download/eslint-config-react-app-3.0.0-next.3e165448.tgz#7ccaaeef06c4a5b7eac8477587fd02a86e1729da"
   dependencies:
     confusing-browser-globals "2.0.0-next.3e165448"
 
