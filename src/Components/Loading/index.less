@@ -1,0 +1,81 @@
+@theme: #666;
+.progress-ring-root {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  position: relative;
+}
+.progress-ring-item {
+  background: @theme;
+  position: absolute;
+  top: 0px;
+  left: 25px;
+  width: 5px;
+  height: 5px;
+  opacity: 0;
+  transform-origin: 0px 25px;
+  border-radius: 50%;
+}
+
+.react-uwp-progress-ring_6_5000-item-0 {
+  animation: CircleLoopFade 5000ms 0ms linear infinite normal forwards;
+}
+
+.react-uwp-progress-ring_6_5000-item-1 {
+  animation: CircleLoopFade 5000ms 125ms linear infinite normal forwards;
+}
+
+.react-uwp-progress-ring_6_5000-item-2 {
+  animation: CircleLoopFade 5000ms 250ms linear infinite normal forwards;
+}
+
+.react-uwp-progress-ring_6_5000-item-3 {
+  animation: CircleLoopFade 5000ms 375ms linear infinite normal forwards;
+}
+
+.react-uwp-progress-ring_6_5000-item-4 {
+  animation: CircleLoopFade 5000ms 500ms linear infinite normal forwards;
+}
+
+.react-uwp-progress-ring_6_5000-item-5 {
+  animation: CircleLoopFade 5000ms 625ms linear infinite normal forwards;
+}
+
+@keyframes CircleLoopFade {
+  0% {
+    transform: rotateZ(0deg);
+    opacity: 1;
+  }
+  12.5% {
+    transform: rotateZ(180deg);
+    opacity: 1;
+  }
+  25% {
+    transform: rotateZ(270deg);
+    opacity: 1;
+  }
+  37.5% {
+    transform: rotateZ(300deg);
+    opacity: 1;
+  }
+  50% {
+    transform: rotateZ(360deg);
+    opacity: 1;
+  }
+  62.5% {
+    transform: rotateZ(540deg);
+    opacity: 1;
+  }
+  75% {
+    transform: rotateZ(630deg);
+    opacity: 1;
+  }
+  87.5% {
+    transform: rotateZ(660deg);
+    opacity: 1;
+  }
+  100% {
+    transform: rotateZ(720deg);
+    opacity: 1;
+  }
+}
