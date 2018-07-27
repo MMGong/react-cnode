@@ -20,9 +20,9 @@ function apis(name, params, options) {
       ...options,
     }).then((data) => {
       if (data && data.data && data.data.success) {
-        resolve(data);
+        resolve(data.data);
       } else {
-        reject(new Error(data.error_msg));
+        reject(new Error(data.data.error_msg));
       }
     }).catch((error) => {
       reject(error);
