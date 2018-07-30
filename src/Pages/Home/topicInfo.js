@@ -16,7 +16,7 @@ export default class TopicInfo extends Component {
     const topicInfo = this.props.topicInfo;
     const distanceDate = distanceInWordsToNow(new Date(topicInfo.create_at), { locale: zhLocale });
     return (
-      <li className="home__box flex">
+      <div className="home__box flex">
         <div className="home__box__left flex-1">
           <div className="home__box__meta">
             {
@@ -56,7 +56,7 @@ export default class TopicInfo extends Component {
             />
           </LazyLoad>
         </div>
-      </li>
+      </div>
     );
   }
 }

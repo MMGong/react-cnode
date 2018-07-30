@@ -14,7 +14,7 @@ class HomeStore {
       console.log('data:', data);
       if (data.success) {
         runInAction(() => {
-          this.topicList = data.data;
+          this.topicList = this.topicList.concat(data.data);
         });
       }
     });

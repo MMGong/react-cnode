@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { observer, inject, PropTypes } from 'mobx-react';
+import Infinite from 'react-infinite';
 import ReactPlaceholder from 'react-placeholder';
 import 'react-placeholder/lib/reactPlaceholder.css';
-import TopicList from './topicList';
+// import TopicList from './topicList';
+import TopicInfo from './topicInfo';
 import './index.less';
 
 // apis('getTopics').then((data) => {
@@ -22,9 +24,23 @@ export default class Home extends Component {
   static propTypes = {
     homeStore: PropTypes.observableObject.isRequired,
   }
+  constructor(props) {
+    super(props);
+    this.state = {};
+    this.page = 1;
+    this.limit = 20;
+  }
   componentDidMount() {
-    console.log('===');
-    this.props.homeStore.getTopicList();
+    this.getTopicList();
+  }
+  getTopicList = (page) => {
+    console.log('0=-0=0=0=', page);
+    this.props.homeStore.getTopicList({
+      page: this.page,
+      tab: '',
+      limit: this.limit,
+    });
+    this.page += 1;
   }
   render() {
     const topicList = this.props.homeStore.topicList;
@@ -35,11 +51,23 @@ export default class Home extends Component {
           type="media"
           ready={topicList.length > 0}
           color="#fbfbfb"
-          rows={4}
+          rows={5}
         >
-          <TopicList
-            topicList={topicList}
-          />
+          <Infinite
+            elementHeight={108}
+            useWindowAsScrollContainer
+            infiniteLoadBeginEdgeOffset={200}
+            onInfiniteLoad={this.getTopicList}
+          >
+            {
+              topicList.map(item => (
+                <TopicInfo
+                  key={item.id}
+                  topicInfo={item}
+                />
+              ))
+            }
+          </Infinite>
         </ReactPlaceholder>
       </div>
     );
