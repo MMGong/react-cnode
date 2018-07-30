@@ -7276,7 +7276,7 @@ react-loadable@^5.4.0:
 
 react-motion@^0.5.2:
   version "0.5.2"
-  resolved "http://r.npm.sankuai.com/react-motion/download/react-motion-0.5.2.tgz#0dd3a69e411316567927917c6626551ba0607316"
+  resolved "http://registry.npm.taobao.org/react-motion/download/react-motion-0.5.2.tgz#0dd3a69e411316567927917c6626551ba0607316"
   dependencies:
     performance-now "^0.2.0"
     prop-types "^15.5.8"

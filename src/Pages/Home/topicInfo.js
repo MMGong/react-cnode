@@ -4,12 +4,14 @@ import dateFormat from 'date-fns/format';
 import distanceInWordsToNow from 'date-fns/distance_in_words_to_now';
 import zhLocale from 'date-fns/locale/zh_cn';
 import LazyLoad from 'react-lazyload';
+import defaultAvatar from '../../Assets/images/default.jpg';
 
 export default class TopicInfo extends Component {
   static propTypes = {
     topicInfo: PropTypes.oneOfType([PropTypes.object]).isRequired,
   }
   state = {}
+  getPlaceHolder = () => <img src={defaultAvatar} alt="" />
   render() {
     const topicInfo = this.props.topicInfo;
     const distanceDate = distanceInWordsToNow(new Date(topicInfo.create_at), { locale: zhLocale });
@@ -44,8 +46,14 @@ export default class TopicInfo extends Component {
         <div
           className="home__box__right"
         >
-          <LazyLoad height={50}>
-            <img src={topicInfo.author.avatar_url} alt="" />
+          <LazyLoad
+            height="5rem"
+            placeholder={this.getPlaceHolder()}
+          >
+            <img
+              src={topicInfo.author.avatar_url}
+              alt=""
+            />
           </LazyLoad>
         </div>
       </li>
