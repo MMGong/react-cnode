@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import dateFormat from 'date-fns/format';
 import distanceInWordsToNow from 'date-fns/distance_in_words_to_now';
 import zhLocale from 'date-fns/locale/zh_cn';
@@ -33,7 +34,7 @@ export default class TopicInfo extends PureComponent {
             <span className="home__box__meta--info">{dateFormat(topicInfo.create_at, 'YYYY-MM-DD HH:mm')}</span>
             <span className="home__box__meta--info">{distanceDate}前</span>
           </div>
-          <a href="javascript:void(0);" className="home__box--title">{topicInfo.title}</a>
+          <Link to={`/topic/${topicInfo.id}`} className="home__box--title">{topicInfo.title}</Link>
           <div className="home__box__action">
             <span className="home__box__action--box">
               访问数: {topicInfo.visit_count}

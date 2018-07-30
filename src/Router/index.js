@@ -8,8 +8,8 @@ const asyncHome = Loadable({
   loader: () => import(/* webpackChunkName: "home" */'../Pages/Home'),
   loading: Loading,
 });
-const asyncTest = Loadable({
-  loader: () => import(/* webpackChunkName: "test" */'../Pages/Test'),
+const asyncTopicDetail = Loadable({
+  loader: () => import(/* webpackChunkName: "topicDetail" */'../Pages/TopicDetail'),
   loading: Loading,
 });
 
@@ -25,7 +25,7 @@ export default class RouterWrapper extends PureComponent {
           <Route path="/" exact render={() => <Redirect to="/theme" />} />
           <Route path="/theme" exact component={asyncHome} />
           <Route path="/theme/:id" exact component={asyncHome} />
-          <Route path="/test" exact component={asyncTest} />
+          <Route path="/topic/:id" exact component={asyncTopicDetail} />
         </Switch>
       </Router>
     );

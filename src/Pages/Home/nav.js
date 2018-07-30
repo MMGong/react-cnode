@@ -28,7 +28,6 @@ export default class Nav extends PureComponent {
     isActive: 'all',
   }
   static getDerivedStateFromProps(nextProps) {
-    console.log('nextProps', nextProps, nextProps.match.params.id);
     return {
       isActive: !nextProps.match.params.id ? 'all' : nextProps.match.params.id,
     };
@@ -42,6 +41,7 @@ export default class Nav extends PureComponent {
     return (
       <nav className="home__nav">
         <ul className="home__nav__list">
+          <li className="home__nav__item" style={{ fontSize: '1.5rem' }}>CNODE</li>
           {
             navList.map(item => (
               <li
