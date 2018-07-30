@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { observer, inject, PropTypes } from 'mobx-react';
-import Infinite from 'react-infinite';
+import LimitedInfiniteScroll from 'react-limited-infinite-scroll';
 import ReactPlaceholder from 'react-placeholder';
 import 'react-placeholder/lib/reactPlaceholder.css';
 // import TopicList from './topicList';
@@ -51,13 +51,13 @@ export default class Home extends Component {
           type="media"
           ready={topicList.length > 0}
           color="#fbfbfb"
-          rows={5}
+          rows={4}
         >
-          <Infinite
-            elementHeight={108}
-            useWindowAsScrollContainer
-            infiniteLoadBeginEdgeOffset={200}
-            onInfiniteLoad={this.getTopicList}
+          <LimitedInfiniteScroll
+            loadNext={this.getTopicList}
+            pageStart={1}
+            limit={15}
+            hasMore
           >
             {
               topicList.map(item => (
@@ -67,7 +67,7 @@ export default class Home extends Component {
                 />
               ))
             }
-          </Infinite>
+          </LimitedInfiniteScroll>
         </ReactPlaceholder>
       </div>
     );
