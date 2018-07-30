@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import dateFormat from 'date-fns/format';
 import distanceInWordsToNow from 'date-fns/distance_in_words_to_now';
@@ -6,7 +6,7 @@ import zhLocale from 'date-fns/locale/zh_cn';
 import LazyLoad from 'react-lazyload';
 import defaultAvatar from '../../Assets/images/default.jpg';
 
-export default class TopicInfo extends Component {
+export default class TopicInfo extends PureComponent {
   static propTypes = {
     topicInfo: PropTypes.oneOfType([PropTypes.object]).isRequired,
   }

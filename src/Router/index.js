@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Router, Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import Loadable from 'react-loadable';
 import history from './history';
 import Loading from '../Components/Loading';
@@ -22,10 +22,13 @@ export default class RouterWrapper extends PureComponent {
     return (
       <Router history={history}>
         <Switch>
-          <Route path="/" exact component={asyncHome} />
+          <Route path="/" exact render={() => <Redirect to="/theme" />} />
+          <Route path="/theme" exact component={asyncHome} />
+          <Route path="/theme/:id" exact component={asyncHome} />
           <Route path="/test" exact component={asyncTest} />
         </Switch>
       </Router>
     );
   }
 }
+

@@ -5,6 +5,7 @@ import ReactPlaceholder from 'react-placeholder';
 import 'react-placeholder/lib/reactPlaceholder.css';
 // import TopicList from './topicList';
 import TopicInfo from './topicInfo';
+import Nav from './nav';
 import './index.less';
 
 // apis('getTopics').then((data) => {
@@ -46,29 +47,32 @@ export default class Home extends Component {
     const topicList = this.props.homeStore.topicList;
     return (
       <div className="home">
-        <ReactPlaceholder
-          showLoadingAnimation
-          type="media"
-          ready={topicList.length > 0}
-          color="#fbfbfb"
-          rows={4}
-        >
-          <LimitedInfiniteScroll
-            loadNext={this.getTopicList}
-            pageStart={1}
-            limit={15}
-            hasMore
+        <Nav />
+        <div className="home__container">
+          <ReactPlaceholder
+            showLoadingAnimation
+            type="media"
+            ready={topicList.length > 0}
+            color="#fbfbfb"
+            rows={4}
           >
-            {
-              topicList.map(item => (
-                <TopicInfo
-                  key={item.id}
-                  topicInfo={item}
-                />
-              ))
-            }
-          </LimitedInfiniteScroll>
-        </ReactPlaceholder>
+            <LimitedInfiniteScroll
+              loadNext={this.getTopicList}
+              pageStart={1}
+              limit={15}
+              hasMore
+            >
+              {
+                topicList.map(item => (
+                  <TopicInfo
+                    key={item.id}
+                    topicInfo={item}
+                  />
+                ))
+              }
+            </LimitedInfiniteScroll>
+          </ReactPlaceholder>
+        </div>
       </div>
     );
   }
