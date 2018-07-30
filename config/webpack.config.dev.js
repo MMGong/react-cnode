@@ -51,6 +51,7 @@ const getStyleLoaders = (cssOptions, preProcessor) => {
           require('postcss-flexbugs-fixes'),
           autoprefixer({
             flexbox: 'no-2009',
+            browsers: ['> 1%', 'last 10 versions', 'not ie <= 8']
           }),
         ],
       },
@@ -280,7 +281,7 @@ module.exports = {
             test: cssRegex,
             exclude: cssModuleRegex,
             use: getStyleLoaders({
-              importLoaders: 2,
+              importLoaders: 3,
             }, 'less-loader'),
           },
           // Adds support for CSS Modules (https://github.com/css-modules/css-modules)
@@ -288,7 +289,7 @@ module.exports = {
           {
             test: cssModuleRegex,
             use: getStyleLoaders({
-              importLoaders: 2,
+              importLoaders: 3,
               modules: true,
               getLocalIdent: getCSSModuleLocalIdent,
             }, 'less-loader'),

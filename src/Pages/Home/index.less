@@ -1,9 +1,63 @@
 .home {
+  padding-top: 10px;
   &__box {
     padding: 1.5rem 2rem;
     font-size: 1.4rem;
     color: #2e3135;
     font-weight: 600;
     line-height: 1.2;
+    border-bottom: 1px solid rgba(178,186,194,.15);
+    min-width: 0;
+    &__meta {
+      font-size: 1rem;
+      color: #b2bac2;
+      &--info {
+        &:not(:last-child)::after {
+          content: '·';
+          color: #b2bac2;
+          margin: 0 .4rem;
+        }
+      }
+      &--top {
+        font-weight: 600;
+        color: #b71ed7;
+        font-size: 1rem;
+      }
+    }
+    &--title {
+      display: block;
+      margin: .8rem 0 1rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    &__action {
+      color: #b4b4b4;
+      font-size: 1rem;
+      vertical-align: middle;
+      & > span, & > span .iconfont {
+        vertical-align: middle;
+      }
+      &--box {
+        margin-right: 10px;
+      }
+    }
+    &__left {
+      // overflow: hidden;
+      min-width: 0;
+    }
+    &__right {
+      width: 5rem;
+      height: 5rem;
+      margin-left: 2rem;
+      background-color: #fff;
+      border-radius: 2px;
+      background-size: cover;
+      background-repeat: no-repeat;
+      & > img {
+        display: block;
+        width: 100%;
+      }
+    }
   }
 }

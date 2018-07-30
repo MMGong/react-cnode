@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { observer, inject, PropTypes as MobxPropsTypes } from 'mobx-react';
+import { observer, inject, PropTypes } from 'mobx-react';
 import ReactPlaceholder from 'react-placeholder';
 import 'react-placeholder/lib/reactPlaceholder.css';
-// import Loading from '../../Components/Loading';
+import TopicList from './topicList';
 import './index.less';
 
 // apis('getTopics').then((data) => {
@@ -18,12 +18,12 @@ import './index.less';
   homeStore: stores.homeStore,
 }))
 @observer
-export default class App extends Component {
+export default class Home extends Component {
   static propTypes = {
-    homeStore: MobxPropsTypes.observableObject.isRequired,
+    homeStore: PropTypes.observableObject.isRequired,
   }
   componentDidMount() {
-    console.log('======', this.props);
+    console.log('===');
     this.props.homeStore.getTopicList();
   }
   render() {
@@ -34,15 +34,12 @@ export default class App extends Component {
           showLoadingAnimation
           type="media"
           ready={topicList.length > 0}
+          color="#fbfbfb"
           rows={4}
         >
-          {
-            topicList.map(item => (
-              <div key={item.id} className="home__box">
-                <div>{item.title}</div>
-              </div>
-            ))
-          }
+          <TopicList
+            topicList={topicList}
+          />
         </ReactPlaceholder>
       </div>
     );
