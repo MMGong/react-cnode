@@ -2,9 +2,10 @@
  * @Author: gonghao
  * @Date: 2018-07-30 23:04:10
  * @Last Modified by: gonghao
- * @Last Modified time: 2018-07-31 10:15:33
+ * @Last Modified time: 2018-07-31 14:16:55
  * @Desc: 文章详情
  */
+/* eslint-diable react/no-danger */
 import React, { Component } from 'react';
 import { observer, inject, PropTypes } from 'mobx-react';
 import dateFormat from 'date-fns/format';
@@ -46,6 +47,10 @@ export default class TopicDetail extends Component {
               <span className="middle-dot">来自 {themeMap[topicDetail.tab].desc}</span>
             </div>
           </div>
+        </div>
+        <h1 className="detail__title">{topicDetail.title}</h1>
+        <div>
+          <div dangerouslySetInnerHTML={{ __html: topicDetail.content }} />
         </div>
       </section>
     );
