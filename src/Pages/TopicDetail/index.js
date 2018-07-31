@@ -2,11 +2,14 @@
  * @Author: gonghao
  * @Date: 2018-07-30 23:04:10
  * @Last Modified by: gonghao
- * @Last Modified time: 2018-07-30 23:51:11
+ * @Last Modified time: 2018-07-31 10:15:33
  * @Desc: 文章详情
  */
 import React, { Component } from 'react';
 import { observer, inject, PropTypes } from 'mobx-react';
+import dateFormat from 'date-fns/format';
+import { themeMap } from '../../Config';
+import './index.less';
 
 @inject('detailStore')
 @observer
@@ -25,17 +28,22 @@ export default class TopicDetail extends Component {
   }
   render() {
     const topicDetail = this.props.detailStore.topicDetail;
+    if (Object.keys(topicDetail).length === 0) return null;
     return (
       <section className="detail">
-        <div className="detail__author">
-          <div className="detail__author__avatar" />
-          <div>
-            <div>{topicDetail.author ? topicDetail.author.loginname : ''}</div>
-            <div>
-              <span>发布于：</span>
-              <span>阅读 231</span>
-              <span>最后一次编辑</span>
-              <span>来自 分享</span>
+        <div className="detail__author flex">
+          <div
+            className="detail__author__avatar"
+            style={{ backgroundImage: topicDetail.author ? `url(${topicDetail.author.avatar_url})` : '' }}
+          />
+          <div className="detail__author__info flex-1 flex flex-v flex-h-between">
+            <div className="detail__author__info--name ellipsis">
+              {topicDetail.author ? topicDetail.author.loginname : ''}
+            </div>
+            <div className="detail__author__info--status">
+              <span className="middle-dot">发布于 {dateFormat(topicDetail.create_at, 'YYYY-MM-DD HH:mm')}</span>
+              <span className="middle-dot">阅读 {topicDetail.visit_count}</span>
+              <span className="middle-dot">来自 {themeMap[topicDetail.tab].desc}</span>
             </div>
           </div>
         </div>

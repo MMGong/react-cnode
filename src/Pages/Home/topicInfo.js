@@ -22,17 +22,17 @@ export default class TopicInfo extends PureComponent {
           <div className="home__box__meta">
             {
               topicInfo.top ? (
-                <span className="home__box__meta--info home__box__meta--top">置顶</span>
+                <span className="home__box__meta--info home__box__meta--top middle-dot">置顶</span>
               ) : null
             }
             {
               topicInfo.good ? (
-                <span className="home__box__meta--info home__box__meta--top">精华</span>
+                <span className="home__box__meta--info home__box__meta--top middle-dot">精华</span>
               ) : null
             }
-            <span className="home__box__meta--info">{topicInfo.author.loginname}</span>
-            <span className="home__box__meta--info">{dateFormat(topicInfo.create_at, 'YYYY-MM-DD HH:mm')}</span>
-            <span className="home__box__meta--info">{distanceDate}前</span>
+            <span className="home__box__meta--info middle-dot">{topicInfo.author.loginname}</span>
+            <span className="home__box__meta--info middle-dot">{dateFormat(topicInfo.create_at, 'YYYY-MM-DD HH:mm')}</span>
+            <span className="home__box__meta--info middle-dot">{distanceDate}前</span>
           </div>
           <Link to={`/topic/${topicInfo.id}`} className="home__box--title">{topicInfo.title}</Link>
           <div className="home__box__action">

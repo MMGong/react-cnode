@@ -48,7 +48,6 @@ export default class Home extends Component {
   }
   render() {
     const topicList = this.props.homeStore.topicList;
-    console.log('===', this.page * this.limit, topicList.length);
     return (
       <div className="home">
         <Nav />
