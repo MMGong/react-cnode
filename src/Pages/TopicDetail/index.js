@@ -2,10 +2,10 @@
  * @Author: gonghao
  * @Date: 2018-07-30 23:04:10
  * @Last Modified by: gonghao
- * @Last Modified time: 2018-07-31 14:17:35
+ * @Last Modified time: 2018-07-31 14:18:02
  * @Desc: 文章详情
  */
-/* eslint-diable react/no-danger  */
+/* eslint-disable react/no-danger  */
 import React, { Component } from 'react';
 import { observer, inject, PropTypes } from 'mobx-react';
 import dateFormat from 'date-fns/format';
