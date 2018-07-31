@@ -2,15 +2,19 @@
  * @Author: gonghao
  * @Date: 2018-07-30 23:04:10
  * @Last Modified by: gonghao
- * @Last Modified time: 2018-07-31 14:18:02
+ * @Last Modified time: 2018-07-31 21:34:06
  * @Desc: 文章详情
  */
 /* eslint-disable react/no-danger  */
 import React, { Component } from 'react';
 import { observer, inject, PropTypes } from 'mobx-react';
 import dateFormat from 'date-fns/format';
+// import codePrettify from 'code-prettify/loader/prettify';
 import { themeMap } from '../../Config';
+// import '../../../node_modules/code-prettify/styles/sons-of-obsidian.css';
 import './index.less';
+
+// console.log('codePrettify', codePrettify);
 
 @inject('detailStore')
 @observer
@@ -26,6 +30,14 @@ export default class TopicDetail extends Component {
   }
   componentDidMount() {
     this.props.detailStore.getTopicDetail(this.state.id);
+  }
+  componentDidUpdate(preProps) {
+    if (preProps.detailStore.topicDetail.content) {
+      window.hljs.initHighlighting();
+    }
+  }
+  componentWillUnmount() {
+    this.props.detailStore.clearTopicDetail();
   }
   render() {
     const topicDetail = this.props.detailStore.topicDetail;
@@ -49,8 +61,8 @@ export default class TopicDetail extends Component {
           </div>
         </div>
         <h1 className="detail__title">{topicDetail.title}</h1>
-        <div>
-          <div dangerouslySetInnerHTML={{ __html: topicDetail.content }} />
+        <div className="detail__content">
+          <div className="markdown-text" dangerouslySetInnerHTML={{ __html: topicDetail.content }} />
         </div>
       </section>
     );
