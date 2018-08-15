@@ -2,19 +2,17 @@
  * @Author: gonghao
  * @Date: 2018-07-30 23:04:10
  * @Last Modified by: gonghao
- * @Last Modified time: 2018-07-31 21:34:06
+ * @Last Modified time: 2018-08-12 20:40:29
  * @Desc: 文章详情
  */
 /* eslint-disable react/no-danger  */
 import React, { Component } from 'react';
 import { observer, inject, PropTypes } from 'mobx-react';
 import dateFormat from 'date-fns/format';
-// import codePrettify from 'code-prettify/loader/prettify';
 import { themeMap } from '../../Config';
-// import '../../../node_modules/code-prettify/styles/sons-of-obsidian.css';
+import Reply from './reply';
 import './index.less';
 
-// console.log('codePrettify', codePrettify);
 
 @inject('detailStore')
 @observer
@@ -64,6 +62,9 @@ export default class TopicDetail extends Component {
         <div className="detail__content">
           <div className="markdown-text" dangerouslySetInnerHTML={{ __html: topicDetail.content }} />
         </div>
+        <Reply
+          list={topicDetail.replies}
+        />
       </section>
     );
   }

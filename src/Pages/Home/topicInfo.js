@@ -30,7 +30,12 @@ export default class TopicInfo extends PureComponent {
                 <span className="home__box__meta--info home__box__meta--top middle-dot">精华</span>
               ) : null
             }
-            <span className="home__box__meta--info middle-dot">{topicInfo.author.loginname}</span>
+            <Link
+              to={`/user/${topicInfo.author.loginname}`}
+              className="home__box__meta--info middle-dot"
+            >
+              {topicInfo.author.loginname}
+            </Link>
             <span className="home__box__meta--info middle-dot">{dateFormat(topicInfo.create_at, 'YYYY-MM-DD HH:mm')}</span>
             <span className="home__box__meta--info middle-dot">{distanceDate}前</span>
           </div>

@@ -3,7 +3,6 @@ import { observer, inject, PropTypes } from 'mobx-react';
 import LimitedInfiniteScroll from 'react-limited-infinite-scroll';
 import ReactPlaceholder from 'react-placeholder';
 import 'react-placeholder/lib/reactPlaceholder.css';
-// import TopicList from './topicList';
 import TopicInfo from './topicInfo';
 import Nav from './nav';
 import './index.less';
