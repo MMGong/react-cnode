@@ -1,8 +1,26 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
+import { observer, inject, PropTypes as MobxPropTypes } from 'mobx-react';
+import PropTypes from 'prop-types';
 
 @withRouter
-export default class Nav extends PureComponent {
+@inject(stores => ({
+  userInfo: stores.loginStore.userInfo,
+  accessToken: stores.loginStore.accessToken,
+  checkAccessToken: stores.loginStore.checkAccessToken,
+}))
+@observer
+export default class Nav extends Component {
+  static propTypes = {
+    userInfo: MobxPropTypes.observableObject.isRequired,
+    accessToken: PropTypes.string.isRequired,
+    checkAccessToken: PropTypes.func.isRequired,
+  }
+  static getDerivedStateFromProps(nextProps) {
+    return {
+      isActive: !nextProps.match.params.id ? 'all' : nextProps.match.params.id,
+    };
+  }
   state = {
     navList: [{
       key: 'all',
@@ -27,19 +45,20 @@ export default class Nav extends PureComponent {
     }],
     isActive: 'all',
   }
-  static getDerivedStateFromProps(nextProps) {
-    return {
-      isActive: !nextProps.match.params.id ? 'all' : nextProps.match.params.id,
-    };
+  componentDidMount() {
+    console.log(this.props);
+    if (this.props.accessToken) {
+      this.props.checkAccessToken(this.props.accessToken, true);
+    }
   }
   render() {
-    console.log(this.props, this.state);
     const {
       navList,
       isActive,
     } = this.state;
+    const userInfo = this.props.userInfo;
     return (
-      <nav className="home__nav">
+      <nav className="home__nav flex">
         <ul className="home__nav__list">
           <li className="home__nav__item" style={{ fontSize: '1.5rem' }}>CNODE</li>
           {
@@ -53,6 +72,15 @@ export default class Nav extends PureComponent {
             ))
           }
         </ul>
+        <Link to={`/user/${userInfo.loginname}`} className="home__user flex flex-v-c flex-h-end">
+          <div
+            className="home__user__avatar"
+            style={{
+              backgroundImage: `url(${userInfo.avatar_url})`
+            }}
+          />
+          <span className="home__user__name ellipsis" title={userInfo.loginname}>{userInfo.loginname}</span>
+        </Link>
       </nav>
     );
   }

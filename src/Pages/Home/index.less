@@ -69,6 +69,7 @@
     height: @navHeight;
     background: #fff;
     box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
+    z-index: 1000;
     &__list {
       max-width: @maxWidth;
       line-height: 1;
@@ -77,6 +78,7 @@
       display: flex;
       align-items: center;
       color: #909090;
+      flex: 4;
     }
     &__item {
       font-size: 1.15rem;
@@ -97,5 +99,32 @@
   &__container {
     background: #fff;
     margin-top: @navHeight + 15px;
+  }
+  &__user {
+    padding-right: 8px;
+    flex: 1;
+    width: 120px;
+    &__avatar {
+      width: 30px;
+      height: 30px;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      border-radius: 50%;
+    }
+    &__name {
+      margin-left: 8px;
+      color: #666;
+    }
+  }
+}
+@media screen and (max-width: 350px) {
+  .home__nav__item {
+    padding: 0 .6rem;
+  }
+}
+@media screen and (max-width: 480px) {
+  .home__user {
+    display: none;
   }
 }

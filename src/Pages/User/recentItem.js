@@ -17,14 +17,15 @@ export default class RecentItem extends Component {
     return (
       <li className="flex recent flex flex-v-c">
         <div className="recent__avatar flex flex-v-c">
-          <div
+          <Link
+            to={`/user/${info.author.loginname}`}
             className="recent__avatar--img"
             style={{ backgroundImage: `url(${info.author.avatar_url})` }}
             title={info.author.loginname}
           />
         </div>
         <div className="flex-1 flex flex-v-c recent__title">
-          <Link to={`/topic/${info.id}`} >{info.title}</Link>
+          <Link to={`/topic/${info.id}`} className="ellipsis" >{info.title}</Link>
         </div>
         <div className="recent__time">{distanceDate}前</div>
       </li>
