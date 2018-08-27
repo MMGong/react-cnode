@@ -49,7 +49,8 @@ export default class TopicInfo extends PureComponent {
             </span>
           </div>
         </div>
-        <div
+        <Link
+          to={`/user/${topicInfo.author.loginname}`}
           className="home__box__right"
         >
           <LazyLoad
@@ -61,7 +62,7 @@ export default class TopicInfo extends PureComponent {
               alt=""
             />
           </LazyLoad>
-        </div>
+        </Link>
       </div>
     );
   }

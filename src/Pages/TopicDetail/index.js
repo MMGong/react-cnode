@@ -2,13 +2,14 @@
  * @Author: gonghao
  * @Date: 2018-07-30 23:04:10
  * @Last Modified by: gonghao
- * @Last Modified time: 2018-08-12 20:40:29
+ * @Last Modified time: 2018-08-27 15:16:40
  * @Desc: 文章详情
  */
 /* eslint-disable react/no-danger  */
 import React, { Component } from 'react';
 import { observer, inject, PropTypes } from 'mobx-react';
 import dateFormat from 'date-fns/format';
+import { Link } from 'react-router-dom';
 import { themeMap } from '../../Config';
 import Reply from './reply';
 import './index.less';
@@ -43,14 +44,19 @@ export default class TopicDetail extends Component {
     return (
       <section className="detail">
         <div className="detail__author flex">
-          <div
-            className="detail__author__avatar"
-            style={{ backgroundImage: topicDetail.author ? `url(${topicDetail.author.avatar_url})` : '' }}
-          />
+          <Link to={`/user/${topicDetail.author ? topicDetail.author.loginname : ''}`}>
+            <div
+              className="detail__author__avatar"
+              style={{ backgroundImage: topicDetail.author ? `url(${topicDetail.author.avatar_url})` : '' }}
+            />
+          </Link>
           <div className="detail__author__info flex-1 flex flex-v flex-h-between">
-            <div className="detail__author__info--name ellipsis">
+            <Link
+              to={`/user/${topicDetail.author ? topicDetail.author.loginname : ''}`}
+              className="detail__author__info--name ellipsis"
+            >
               {topicDetail.author ? topicDetail.author.loginname : ''}
-            </div>
+            </Link>
             <div className="detail__author__info--status">
               <span className="middle-dot">发布于 {dateFormat(topicDetail.create_at, 'YYYY-MM-DD HH:mm')}</span>
               <span className="middle-dot">阅读 {topicDetail.visit_count}</span>
