@@ -1,3 +1,5 @@
+@import "../../Assets/css/theme.less";
+
 .detail {
   background: #fff;
   padding: 2rem;
@@ -84,6 +86,9 @@
       }
       &--zan {
         color: #909090;
+        &:hover {
+          color: @blue;
+        }
       }
     }
     &__content {
@@ -96,12 +101,22 @@
       color: #909090;
       vertical-align: middle;
       padding-top: 2px;
+      cursor: pointer;
+      &.active {
+        color: @blue;
+        .reply__item__user--zan {
+          color: @blue;
+        }
+      }
       & > .iconfont {
         vertical-align: middle;
       }
       & > span {
         font-size: 1rem;
         margin-left: 5px;
+      }
+      &:hover {
+        color: @blue;
       }
     }
   }
