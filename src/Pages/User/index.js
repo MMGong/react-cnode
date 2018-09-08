@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { observer, inject, PropTypes } from 'mobx-react';
 import { withRouter } from 'react-router-dom';
-import dateFormat from 'date-fns/format';
+import dateFormat from 'date-fns/format/index';
 import RecentItem from './recentItem';
 import './index.less';
 

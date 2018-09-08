@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import dateFormat from 'date-fns/format';
-import distanceInWordsToNow from 'date-fns/distance_in_words_to_now';
-import zhLocale from 'date-fns/locale/zh_cn';
+import dateFormat from 'date-fns/format/index';
+import distanceInWordsToNow from 'date-fns/distance_in_words_to_now/index';
+import zhLocale from 'date-fns/locale/zh_cn/index';
 import LazyLoad from 'react-lazyload';
 import defaultAvatar from '../../Assets/images/default.jpg';
 

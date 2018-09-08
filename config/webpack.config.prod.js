@@ -147,6 +147,7 @@ module.exports = {
       }),
       new OptimizeCSSAssetsPlugin(),
     ],
+    
     // Automatically split vendor and commons
     // https://twitter.com/wSokra/status/969633336732905474
     // https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
@@ -259,6 +260,12 @@ module.exports = {
                         },
                       },
                     ],
+                    [require.resolve('@babel/plugin-proposal-decorators'), {
+                      'legacy': true
+                    }],
+                    [require.resolve('@babel/plugin-proposal-class-properties'), {
+                      'loose' : true 
+                    }],
                   ],
                   compact: true,
                   highlightCode: true,
@@ -284,6 +291,14 @@ module.exports = {
                   ],
                   cacheDirectory: true,
                   highlightCode: true,
+                  plugins: [
+                    [require.resolve('@babel/plugin-proposal-decorators'), {
+                      'legacy': true
+                    }],
+                    [require.resolve('@babel/plugin-proposal-class-properties'), {
+                      'loose' : true 
+                    }],
+                  ]
                 },
               },
             ],

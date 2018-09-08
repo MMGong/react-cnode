@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import distanceInWordsToNow from 'date-fns/distance_in_words_to_now';
-import zhLocale from 'date-fns/locale/zh_cn';
+import distanceInWordsToNow from 'date-fns/distance_in_words_to_now/index';
+import zhLocale from 'date-fns/locale/zh_cn/index';
 import { Link } from 'react-router-dom';
 
 export default class RecentItem extends Component {
