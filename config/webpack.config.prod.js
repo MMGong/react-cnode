@@ -35,8 +35,8 @@ if (env.stringified['process.env'].NODE_ENV !== '"production"') {
 }
 
 // style files regexes
-const cssRegex = /\.css$/;
-const cssModuleRegex = /\.module\.css$/;
+const cssRegex = /\.(css|less)$/;
+const cssModuleRegex = /\.module\.(css|less)$/;
 const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
 
@@ -60,7 +60,7 @@ const getStyleLoaders = (cssOptions, preProcessor) => {
         plugins: () => [
           require('postcss-flexbugs-fixes'),
           autoprefixer({
-            flexbox: 'no-2009',
+            // flexbox: 'no-2009',
           }),
         ],
         sourceMap: shouldUseSourceMap,
@@ -97,7 +97,7 @@ module.exports = {
     // There will be one main bundle, and one file per asynchronous chunk.
     // We don't currently advertise code splitting but Webpack supports it.
     filename: 'static/js/[name].[chunkhash:8].js',
-    chunkFilename: 'static/js/[name].[chunkhash:8].chunk.js',
+    chunkFilename: 'static/js/[name].[chunkhash:8].js',
     // We inferred the "public path" (such as / or /my-project) from homepage.
     publicPath: publicPath,
     // Point sourcemap entries to original disk location (format as URL on Windows)
@@ -154,6 +154,14 @@ module.exports = {
     splitChunks: {
       chunks: 'all',
       name: 'vendors',
+      cacheGroups: {
+        styles: {
+          // name: 'styles',
+          test: /\.(css|less)$/,
+          chunks: 'all',
+          enforce: true
+        }
+      },
     },
     // Keep the runtime chunk seperated to enable long term caching
     // https://twitter.com/wSokra/status/969679223278505985
@@ -199,27 +207,6 @@ module.exports = {
       // First, run the linter.
       // It's important to do this before Babel processes the JS.
       {
-        test: /\.(js|jsx|mjs)$/,
-        enforce: 'pre',
-        use: [
-          {
-            options: {
-              formatter: eslintFormatter,
-              eslintPath: require.resolve('eslint'),
-              // TODO: consider separate config for production,
-              // e.g. to enable no-console and no-debugger only in production.
-              baseConfig: {
-                extends: [require.resolve('eslint-config-react-app')],
-              },
-              
-            },
-            loader: require.resolve('eslint-loader'),
-          },
-        ],
-        include: paths.srcPaths,
-        exclude: [/[/\\\\]node_modules[/\\\\]/],
-      },
-      {
         // "oneOf" will traverse all following loaders until one will
         // match the requirements. When no loader matches it will fall
         // back to the "file" loader at the end of the loader list.
@@ -246,30 +233,6 @@ module.exports = {
               require.resolve('thread-loader'),
               {
                 loader: require.resolve('babel-loader'),
-                options: {
-                  
-                  presets: [require.resolve('babel-preset-react-app')],
-                  plugins: [
-                    [
-                      require.resolve('babel-plugin-named-asset-import'),
-                      {
-                        loaderMap: {
-                          svg: {
-                            ReactComponent: 'svgr/webpack![path]',
-                          },
-                        },
-                      },
-                    ],
-                    [require.resolve('@babel/plugin-proposal-decorators'), {
-                      'legacy': true
-                    }],
-                    [require.resolve('@babel/plugin-proposal-class-properties'), {
-                      'loose' : true 
-                    }],
-                  ],
-                  compact: true,
-                  highlightCode: true,
-                },
               },
             ],
           },
@@ -283,23 +246,6 @@ module.exports = {
               require.resolve('thread-loader'),
               {
                 loader: require.resolve('babel-loader'),
-                options: {
-                  babelrc: false,
-                  compact: false,
-                  presets: [
-                    require.resolve('babel-preset-react-app/dependencies'),
-                  ],
-                  cacheDirectory: true,
-                  highlightCode: true,
-                  plugins: [
-                    [require.resolve('@babel/plugin-proposal-decorators'), {
-                      'legacy': true
-                    }],
-                    [require.resolve('@babel/plugin-proposal-class-properties'), {
-                      'loose' : true 
-                    }],
-                  ]
-                },
               },
             ],
           },
@@ -312,50 +258,20 @@ module.exports = {
             test: cssRegex,
             exclude: cssModuleRegex,
             loader: getStyleLoaders({
-              importLoaders: 1,
+              importLoaders: 2,
               sourceMap: shouldUseSourceMap,
-            }),
+            }, 'less-loader'),
           },
           // Adds support for CSS Modules (https://github.com/css-modules/css-modules)
           // using the extension .module.css
           {
             test: cssModuleRegex,
             loader: getStyleLoaders({
-              importLoaders: 1,
+              importLoaders: 2,
               sourceMap: shouldUseSourceMap,
               modules: true,
               getLocalIdent: getCSSModuleLocalIdent,
-            }),
-          },
-          // Opt-in support for SASS. The logic here is somewhat similar
-          // as in the CSS routine, except that "sass-loader" runs first
-          // to compile SASS files into CSS.
-          // By default we support SASS Modules with the
-          // extensions .module.scss or .module.sass
-          {
-            test: sassRegex,
-            exclude: sassModuleRegex,
-            loader: getStyleLoaders(
-              {
-                importLoaders: 2,
-                sourceMap: shouldUseSourceMap,
-              },
-              'sass-loader'
-            ),
-          },
-          // Adds support for CSS Modules, but using SASS
-          // using the extension .module.scss or .module.sass
-          {
-            test: sassModuleRegex,
-            loader: getStyleLoaders(
-              {
-                importLoaders: 2,
-                sourceMap: shouldUseSourceMap,
-                modules: true,
-                getLocalIdent: getCSSModuleLocalIdent,
-              },
-              'sass-loader'
-            ),
+            }, 'less-loader'),
           },
           // The GraphQL loader preprocesses GraphQL queries in .graphql files.
           {
@@ -415,8 +331,8 @@ module.exports = {
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional
-      filename: 'static/css/[name].[contenthash:8].css',
-      chunkFilename: 'static/css/[name].[contenthash:8].chunk.css',
+      filename: 'static/css/vendor.[hash:8].css',
+      chunkFilename: 'static/css/[name].[contenthash:8].css',
     }),
     // Generate a manifest file which contains a mapping of all asset filenames
     // to their corresponding output file so that tools can pick it up without

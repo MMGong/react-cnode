@@ -50,7 +50,7 @@ const getStyleLoaders = (cssOptions, preProcessor) => {
         plugins: () => [
           require('postcss-flexbugs-fixes'),
           autoprefixer({
-            flexbox: 'no-2009',
+            // flexbox: 'no-2009',
             browsers: ['> 1%', 'last 10 versions', 'not ie <= 8']
           }),
         ],
@@ -157,28 +157,6 @@ module.exports = {
     rules: [
       // Disable require.ensure as it's not a standard language feature.
       { parser: { requireEnsure: false } },
-
-      // First, run the linter.
-      // It's important to do this before Babel processes the JS.
-      {
-        test: /\.(js|jsx|mjs)$/,
-        enforce: 'pre',
-        use: [
-          {
-            options: {
-              formatter: eslintFormatter,
-              eslintPath: require.resolve('eslint'),
-              baseConfig: {
-                extends: [require.resolve('eslint-config-react-app')],
-              },
-              
-            },
-            loader: require.resolve('eslint-loader'),
-          },
-        ],
-        include: paths.srcPaths,
-        exclude: [/[/\\\\]node_modules[/\\\\]/],
-      },
       {
         // "oneOf" will traverse all following loaders until one will
         // match the requirements. When no loader matches it will fall
@@ -212,35 +190,6 @@ module.exports = {
               },
               {
                 loader: require.resolve('babel-loader'),
-                options: {
-                  
-                  presets: [
-                    require.resolve('babel-preset-react-app'),
-                  ],
-                  plugins: [
-                    [require.resolve('@babel/plugin-proposal-decorators'), {
-                      'legacy': true
-                    }],
-                    [require.resolve('@babel/plugin-proposal-class-properties'), {
-                      'loose' : true 
-                    }],
-                    [
-                      require.resolve('babel-plugin-named-asset-import'),
-                      {
-                        loaderMap: {
-                          svg: {
-                            ReactComponent: 'svgr/webpack![path]',
-                          },
-                        },
-                      },
-                    ],
-                  ],
-                  // This is a feature of `babel-loader` for webpack (not Babel itself).
-                  // It enables caching results in ./node_modules/.cache/babel-loader/
-                  // directory for faster rebuilds.
-                  cacheDirectory: true,
-                  highlightCode: true,
-                },
               },
             ],
           },
@@ -259,15 +208,6 @@ module.exports = {
               },
               {
                 loader: require.resolve('babel-loader'),
-                options: {
-                  babelrc: false,
-                  compact: false,
-                  presets: [
-                    require.resolve('babel-preset-react-app/dependencies'),
-                  ],
-                  cacheDirectory: true,
-                  highlightCode: true,
-                },
               },
             ],
           },
@@ -293,29 +233,6 @@ module.exports = {
               modules: true,
               getLocalIdent: getCSSModuleLocalIdent,
             }, 'less-loader'),
-          },
-          // Opt-in support for SASS (using .scss or .sass extensions).
-          // Chains the sass-loader with the css-loader and the style-loader
-          // to immediately apply all styles to the DOM.
-          // By default we support SASS Modules with the
-          // extensions .module.scss or .module.sass
-          {
-            test: sassRegex,
-            exclude: sassModuleRegex,
-            use: getStyleLoaders({ importLoaders: 2 }, 'sass-loader'),
-          },
-          // Adds support for CSS Modules, but using SASS
-          // using the extension .module.scss or .module.sass
-          {
-            test: sassModuleRegex,
-            use: getStyleLoaders(
-              {
-                importLoaders: 2,
-                modules: true,
-                getLocalIdent: getCSSModuleLocalIdent,
-              },
-              'sass-loader'
-            ),
           },
           // The GraphQL loader preprocesses GraphQL queries in .graphql files.
           {

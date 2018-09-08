@@ -1,5 +1,9 @@
 # /node_modules and /bower_components ignored by default
 
 dist/
-webpack.*
+*/webpack.*
 src/css/icon/iconfont.js
+config/
+build/
+scripts/
+
