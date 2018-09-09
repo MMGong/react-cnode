@@ -1,0 +1,40 @@
+@import "../../Assets/css/theme.less";
+
+.write {
+  background: #fff;
+  padding: 15px;
+  &__cont {
+    font-size: 14px;
+    margin-bottom: 10px;
+    min-height: 32px;
+    &__left {
+      width: 80px;
+      text-align: right;
+    }
+    &__right {
+      height: 100%;
+      select, input, textarea {
+        padding: 0 5px;
+        border: 1px solid #eaeaea;
+        border-radius: 2px;
+        background: #fff;
+        width: 100%;
+        outline: none;
+        height: 32px;
+      }
+      textarea {
+        height: 500px;
+        padding: 5px;
+      }
+    }
+  }
+  &__confirm {
+    padding: 5px 20px;
+    color: #fff;
+    border-radius: 2px;
+    background: @blue;
+    outline: none;
+    border: 0;
+    font-size: 14px;
+  }
+}

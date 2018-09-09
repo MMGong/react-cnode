@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { observer, inject, PropTypes } from 'mobx-react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import dateFormat from 'date-fns/format/index';
 import RecentItem from './recentItem';
 import './index.less';
@@ -30,7 +30,8 @@ export default class User extends Component {
       id: 2,
       desc: '最近参与的话题',
       list: [],
-    }]
+    }],
+    isMySelf: this.props.loginStore.userInfo.loginname === this.props.match.params.loginname
   }
   componentDidMount() {
     const loginname = this.props.match.params.loginname;
@@ -78,6 +79,7 @@ export default class User extends Component {
     const {
       activeTab,
       tabList,
+      isMySelf,
     } = this.state;
     let list = [];
     if (activeTab === 1) {
@@ -85,7 +87,6 @@ export default class User extends Component {
     } else if (activeTab === 2) {
       list = userInfo.recent_replies || [];
     } else {
-      console.log(tabList);
       list = tabList[2] ? tabList[2].list : [];
     }
     return (
@@ -96,6 +97,11 @@ export default class User extends Component {
             <div className="user__info__content--loginname">{userInfo.loginname}</div>
             <div className="user__info__content--github">积分: {userInfo.score}</div>
             <div className="user__info__content--createtime">创建于: {userInfo.create_at ? dateFormat(userInfo.create_at, 'YYYY-MM-DD HH:mm') : ''}</div>
+            {
+              isMySelf && (
+                <Link to="/write" className="user__write">写文章</Link>
+              )
+            }
           </div>
         </div>
         <div style={{ background: '#f4f5f5', height: '1rem' }} />

@@ -13,11 +13,15 @@ const asyncTopicDetail = Loadable({
   loading: Loading,
 });
 const asyncUser = Loadable({
-  loader: () => import(/* webpackChunkName: "asyncUser" */'../Pages/User'),
+  loader: () => import(/* webpackChunkName: "user" */'../Pages/User'),
   loading: Loading,
 });
 const asyncLogin = Loadable({
-  loader: () => import(/* webpackChunkName: "asyncLogin" */'../Pages/Login'),
+  loader: () => import(/* webpackChunkName: "login" */'../Pages/Login'),
+  loading: Loading,
+});
+const asyncWrite = Loadable({
+  loader: () => import(/* webpackChunkName: "write" */'../Pages/Write'),
   loading: Loading,
 });
 
@@ -36,6 +40,8 @@ export default class RouterWrapper extends PureComponent {
           <Route path="/topic/:id" exact component={asyncTopicDetail} />
           <Route path="/user/:loginname" exact component={asyncUser} />
           <Route path="/login" exact component={asyncLogin} />
+          <Route path="/write" exact component={asyncWrite} />
+          <Redirect to="/theme" />
         </Switch>
       </Router>
     );
