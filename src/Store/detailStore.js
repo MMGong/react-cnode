@@ -2,12 +2,12 @@
  * @Author: gonghao
  * @Date: 2018-07-30 23:16:16
  * @Last Modified by: gonghao
- * @Last Modified time: 2018-09-09 13:28:50
+ * @Last Modified time: 2018-09-09 17:15:23
  * @Desc: 文章详情
  */
 
 import { observable, action, runInAction } from 'mobx';
-import { message } from 'antd';
+import message from '../Components/Toast';
 import loginStore from './loginStore';
 import history from '../Router/history';
 import apis from '../Api';

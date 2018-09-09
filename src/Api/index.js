@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { message } from 'antd';
+import message from '../Components/Toast';
 import apiConfigs from './config';
 
 axios.interceptors.response.use(function (response) {
@@ -33,7 +33,6 @@ function apis(name, params, options) {
         reject(new Error(data.data.error_msg));
       }
     }).catch((error) => {
-      console.log('====', error);
       reject(error);
     });
   }).catch((error) => {

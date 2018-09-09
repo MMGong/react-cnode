@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import PropTypes from 'prop-types';
-import { message } from 'antd';
+import message from '../../Components/Toast';
 import apis from '../../Api';
 import history from '../../Router/history';
 import './index.less';
