@@ -2,18 +2,18 @@
  * @Author: gonghao
  * @Date: 2018-07-30 23:04:10
  * @Last Modified by: gonghao
- * @Last Modified time: 2018-09-02 22:24:56
+ * @Last Modified time: 2018-09-08 23:27:11
  * @Desc: 文章详情
  */
 
 /* eslint-disable react/no-danger  */
 
 import React, { Component } from 'react';
-import { observer, inject, PropTypes } from 'mobx-react';
+import { observer, inject, PropTypes as MobxPropTypes } from 'mobx-react';
 import dateFormat from 'date-fns/format/index';
 import { Link } from 'react-router-dom';
 import { themeMap } from '../../Config';
-import Reply from './reply';
+import ReplyList from './replyList';
 import './index.less';
 
 
@@ -21,7 +21,7 @@ import './index.less';
 @observer
 export default class TopicDetail extends Component {
   static propTypes = {
-    detailStore: PropTypes.observableObject.isRequired,
+    detailStore: MobxPropTypes.observableObject.isRequired,
   }
   static getDerivedStateFromProps(nextProps) {
     return {
@@ -39,6 +39,9 @@ export default class TopicDetail extends Component {
   }
   componentWillUnmount() {
     this.props.detailStore.clearTopicDetail();
+  }
+  collect = (isCollect) => {
+    this.props.detailStore.collectTopic(!isCollect);
   }
   render() {
     const topicDetail = this.props.detailStore.topicDetail;
@@ -59,10 +62,13 @@ export default class TopicDetail extends Component {
             >
               {topicDetail.author ? topicDetail.author.loginname : ''}
             </Link>
-            <div className="detail__author__info--status">
+            <div className="detail__author__info--status clearfix">
               <span className="middle-dot">发布于 {dateFormat(topicDetail.create_at, 'YYYY-MM-DD HH:mm')}</span>
               <span className="middle-dot">阅读 {topicDetail.visit_count}</span>
               <span className="middle-dot">来自 {themeMap[topicDetail.tab].desc}</span>
+              <div className="detail__collect float-right" onClick={() => this.collect(topicDetail.is_collect)}>
+                {topicDetail.is_collect ? '取消收藏' : '收藏'}
+              </div>
             </div>
           </div>
         </div>
@@ -70,7 +76,7 @@ export default class TopicDetail extends Component {
         <div className="detail__content">
           <div className="markdown-text" dangerouslySetInnerHTML={{ __html: topicDetail.content }} />
         </div>
-        <Reply
+        <ReplyList
           list={topicDetail.replies}
         />
       </section>

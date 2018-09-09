@@ -26,6 +26,7 @@
         "regenerator": false
       }
     ],
+    ["import", { "libraryName": "antd", "libraryDirectory": "es", "style": "css" }],
     "transform-react-remove-prop-types"
   ]
 }

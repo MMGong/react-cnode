@@ -2,7 +2,7 @@
  * @Author: gonghao
  * @Date: 2018-08-26 19:39:59
  * @Last Modified by: gonghao
- * @Last Modified time: 2018-08-27 10:06:37
+ * @Last Modified time: 2018-09-08 23:19:50
  * @Desc: 用于获取、校验、存储access token
  */
 
@@ -93,7 +93,7 @@ class LoginStore {
   }
 
   @action.bound
-  sertLastUrl(url) { // 设置上次访问的url，登录后直接返回过去
+  setLastUrl(url) { // 设置上次访问的url，登录后直接返回过去
     this.lastUrl = url;
   }
 

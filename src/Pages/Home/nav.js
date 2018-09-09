@@ -46,7 +46,6 @@ export default class Nav extends Component {
     isActive: 'all',
   }
   componentDidMount() {
-    console.log(this.props);
     if (this.props.accessToken) {
       this.props.checkAccessToken(this.props.accessToken, true);
     }
@@ -72,14 +71,17 @@ export default class Nav extends Component {
             ))
           }
         </ul>
-        <Link to={`/user/${userInfo.loginname}`} className="home__user flex flex-v-c flex-h-end">
+        <Link
+          to={userInfo.loginname ? `/user/${userInfo.loginname}` : '/login'}
+          className="home__user flex flex-v-c flex-h-end"
+        >
           <div
             className="home__user__avatar"
             style={{
               backgroundImage: `url(${userInfo.avatar_url})`
             }}
           />
-          <span className="home__user__name ellipsis" title={userInfo.loginname}>{userInfo.loginname}</span>
+          <span className="home__user__name ellipsis" title={userInfo.loginname || '登录'}>{userInfo.loginname || '登录'}</span>
         </Link>
       </nav>
     );

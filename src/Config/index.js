@@ -12,5 +12,8 @@ export const themeMap = {
   },
   job: {
     desc: '招聘',
-  }
+  },
+  dev: {
+    desc: '客户端测试',
+  },
 };

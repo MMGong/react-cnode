@@ -12,7 +12,6 @@ export default class Login extends Component {
     accessToken: '',
   }
   tokenHandler = (e) => {
-    console.log('e:', e, e.target.value);
     this.setState({
       accessToken: e.target.value,
     });

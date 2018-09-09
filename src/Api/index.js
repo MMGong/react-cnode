@@ -1,5 +1,13 @@
 import axios from 'axios';
+import { message } from 'antd';
 import apiConfigs from './config';
+
+axios.interceptors.response.use(function (response) {
+  return response;
+}, function (error) {
+  message.error(error.response.data.error_msg);
+  return Promise.reject(error);
+});
 
 function apis(name, params, options) {
   return new Promise((resolve, reject) => {
@@ -25,10 +33,12 @@ function apis(name, params, options) {
         reject(new Error(data.data.error_msg));
       }
     }).catch((error) => {
+      console.log('====', error);
       reject(error);
     });
   }).catch((error) => {
-    console.error('接口请求错误:', error);
+    console.error('接口请求错误:', error, error.message);
+    return error;
   });
 }
 
