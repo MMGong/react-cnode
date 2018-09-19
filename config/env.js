@@ -8,6 +8,7 @@ const paths = require('./paths');
 delete require.cache[require.resolve('./paths')];
 
 process.env.PORT = 3220;
+process.env.GENERATE_SOURCEMAP = false;
 
 const NODE_ENV = process.env.NODE_ENV;
 if (!NODE_ENV) {
