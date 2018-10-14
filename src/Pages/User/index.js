@@ -30,21 +30,19 @@ export default class User extends Component {
       id: 2,
       desc: '最近参与的话题',
       list: [],
+    }, {
+      id: 3,
+      desc: '我的收藏',
+      list: [],
     }],
     isMySelf: this.props.loginStore.userInfo.loginname === this.props.match.params.loginname
   }
   componentDidMount() {
     const loginname = this.props.match.params.loginname;
     this.props.userStore.getUserInfo(loginname);
-    if (
-      this.props.loginStore.userInfo.loginname
-      && this.props.loginStore.userInfo.loginname === loginname
-    ) {
-      this.props.loginStore.getUserCollectTopics();
-    }
+    this.props.loginStore.getUserCollectTopics(loginname);
   }
   componentWillReceiveProps(nextProps) {
-    console.log('nextProps:', nextProps);
     const curLoginname = this.props.match.params.loginname;
     const willLoginname = nextProps.match.params.loginname;
     if (curLoginname !== willLoginname) {
@@ -53,20 +51,13 @@ export default class User extends Component {
         activeTab: 1,
       });
     }
-    if (
-      nextProps.loginStore.userInfo.loginname
-      && nextProps.loginStore.userInfo.loginname === willLoginname
-    ) {
-      this.changeTabList(nextProps.myCollectTopics);
-    }
+    this.changeTabList(nextProps.myCollectTopics);
   }
   changeTabList(list) {
+    const tabList = this.state.tabList;
+    tabList[2].list = list;
     this.setState({
-      tabList: this.state.tabList.concat([{
-        id: 3,
-        desc: '我的收藏',
-        list: list,
-      }]),
+      tabList: tabList,
     });
   }
   changeTab = (id) => {

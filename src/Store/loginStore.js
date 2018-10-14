@@ -2,7 +2,7 @@
  * @Author: gonghao
  * @Date: 2018-08-26 19:39:59
  * @Last Modified by: gonghao
- * @Last Modified time: 2018-09-08 23:19:50
+ * @Last Modified time: 2018-10-14 16:17:09
  * @Desc: 用于获取、校验、存储access token
  */
 
@@ -98,12 +98,11 @@ class LoginStore {
   }
 
   @action.bound
-  async getUserCollectTopics() {
+  async getUserCollectTopics(loginname = this.userInfo.loginname) {
     try {
       const data = await apis('getUserCollectTopics', {}, {
-        pathExtra: `/${this.userInfo.loginname}`
+        pathExtra: `/${loginname}`
       });
-      console.log(data);
       if (data && data.success) {
         runInAction(() => {
           this.myCollectTopics = data.data;
