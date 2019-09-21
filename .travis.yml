@@ -1,0 +1,17 @@
+language: node_js
+node_js: stable
+services:
+  - docker
+
+branches:
+  only:
+    - master
+
+before_install:
+  - yarn
+
+script:
+  - yarn run build
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker build -t michaelgongm/reactcode:latest .
+  - docker push michaelgongm/reactcode:latest
