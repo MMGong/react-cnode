@@ -7,9 +7,7 @@ branches:
   only:
   - master
 addons:
-  ssh_known_hosts: 
-    - 47.99.117.119
-    - happybug.top
+  ssh_known_hosts: $host_ip
 cache:
   directories:
     - node_modules
@@ -17,13 +15,13 @@ before_install:
 - openssl aes-256-cbc -K $encrypted_52acbdcb51f9_key -iv $encrypted_52acbdcb51f9_iv
   -in id_rsa.enc -out ~/.ssh/id_rsa -d
 - chmod 600 ~/.ssh/id_rsa
-- echo -e "Host 47.99.117.119\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+- echo -e "Host $host_ip\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 - npm install
 script:
 - npm run build
 - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-- docker build -t michaelgongm/reactcode:latest .
-- docker push michaelgongm/reactcode:latest
+- docker build -t michaelgongm/$DOCKER_NAME:latest .
+- docker push michaelgongm/$DOCKER_NAME:latest
 
 after_success:
-  - ssh root@47.99.117.119 -o StrictHostKeyChecking=no "cd ~;docker-compose stop cnode;docker-compose rm -f cnode;docker-compose up -d cnode;exit"
+  - ssh root@$host_ip -o StrictHostKeyChecking=no "cd ~;docker-compose stop $DOCKER_NAME;docker-compose rm -f $DOCKER_NAME;docker-compose up -d $DOCKER_NAME;exit"
