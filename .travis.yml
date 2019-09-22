@@ -20,4 +20,4 @@ script:
 - docker push michaelgongm/reactcode:latest
 
 after_success:
-  - ssh -o StrictHostKeyChecking=no root@47.99.117.119 "cd ~;docker-compose stop cnode;docker-compose rm cnode;docker-compose up -d cnode;exit"
+  - ssh root@47.99.117.119 -o StrictHostKeyChecking=no "cd ~;docker-compose stop cnode;docker-compose rm cnode;docker-compose up -d cnode;exit"
